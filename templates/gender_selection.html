@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Gender</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://images8.alphacoders.com/132/thumb-1920-1323371.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            animation: fadeIn 1.5s ease-in-out; /* Fade in effect for the page */
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin-top: 10%;
+            transform: translateY(100px);
+            animation: slideUp 0.8s ease forwards; /* Slide up effect for the container */
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            color: #1F2937;
+            margin-bottom: 20px;
+            animation: fadeInText 1s ease-in-out; /* Fade in effect for the heading */
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .gender-options {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .gender-option {
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1);
+            transition: transform 0.2s ease-in-out; /* Scaling effect when clicking radio */
+        }
+
+        input[type="radio"]:checked {
+            transform: scale(1.2); /* Slightly larger when selected */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3B82F6;
+            color: #ffffff;
+            font-size: 1.125rem;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Transition effects */
+        }
+
+        button:hover {
+            background-color: #2563EB;
+            transform: scale(1.05); /* Scale up slightly on hover */
+        }
+
+        /* Fade-in animation for the entire page */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Your Gender</h1>
+        <form method="POST" action="{{ url_for('gender_selection') }}">
+            <div class="gender-options">
+                <div class="gender-option">
+                    <input type="radio" name="gender" value="Male" id="male" required>
+                    <label for="male">Male</label>
+                </div>
+                <div class="gender-option">
+                    <input type="radio" name="gender" value="Female" id="female" required>
+                    <label for="female">Female</label>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
