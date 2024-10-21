@@ -35,6 +35,7 @@ Machine Learning: Image analysis using OpenCV
 Payment Gateway: Razorpay integration
 Chatbot: JavaScript-based FAQ Chatbot
 Other Tools: Razorpay API, Flask-MySQLdb for database interaction
+
 Getting Started
 Prerequisites
 Python 3.x
@@ -44,7 +45,31 @@ Node.js (if using advanced chatbot functionality)
 Razorpay API Credentials (for payment gateway integration)
 
 
-Features Overview
+t methods like Netbanking or Cash on Delivery.
+Handles payments securely with user-provided credentials after entering shipping and billing details.
+6. Address and Payment Flow
+Users are prompted to provide their shipping address and PIN code before proceeding to payment.
+The system directs users to payment options, allowing them to complete their purchases.
+7. Fully Responsive Design
+The website has been designed using Tailwind CSS, ensuring that it is responsive and user-friendly across all devices.
+Technologies Used
+Frontend: HTML, CSS (Tailwind CSS), JavaScript
+Backend: Python (Flask), MySQL for database management
+Machine Learning: Image analysis using OpenCV
+Payment Gateway: Razorpay integration
+Chatbot: JavaScript-based FAQ Chatbot
+Other Tools: Razorpay API, Flask-MySQLdb for database interaction
+Getting Started
+Prerequisites
+Python 3.x
+Flask Framework
+MySQL Database
+Node.js (if using advanced chatbot functionality)
+Razorpay API Credentials (for payment gateway integration)
+
+
+Features Overview:
+
 Image Upload & Analysis
 Users upload an image to receive personalized recommendations. The system uses OpenCV to analyze features like:
 
