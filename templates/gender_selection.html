@@ -13,7 +13,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             font-family: 'Inter', sans-serif;
-            animation: fadeIn 1.5s ease-in-out; /* Fade in effect for the page */
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .container {
@@ -25,7 +25,7 @@
             border-radius: 12px;
             margin-top: 10%;
             transform: translateY(100px);
-            animation: slideUp 0.8s ease forwards; /* Slide up effect for the container */
+            animation: slideUp 0.8s ease forwards;
         }
 
         @keyframes slideUp {
@@ -45,7 +45,7 @@
             text-align: center;
             color: #1F2937;
             margin-bottom: 20px;
-            animation: fadeInText 1s ease-in-out; /* Fade in effect for the heading */
+            animation: fadeInText 1s ease-in-out;
         }
 
         @keyframes fadeInText {
@@ -73,11 +73,11 @@
         input[type="radio"] {
             margin-right: 10px;
             transform: scale(1);
-            transition: transform 0.2s ease-in-out; /* Scaling effect when clicking radio */
+            transition: transform 0.2s ease-in-out;
         }
 
         input[type="radio"]:checked {
-            transform: scale(1.2); /* Slightly larger when selected */
+            transform: scale(1.2);
         }
 
         button {
@@ -88,22 +88,33 @@
             font-size: 1.125rem;
             font-weight: bold;
             border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Transition effects */
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         button:hover {
             background-color: #2563EB;
-            transform: scale(1.05); /* Scale up slightly on hover */
+            transform: scale(1.05);
         }
 
-        /* Fade-in animation for the entire page */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        footer {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            color: #4B5563;
+        }
+
+        footer a {
+            color: #3B82F6;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -124,5 +135,10 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+
+    <footer>
+        <p>&copy; 2024 FashionFusion. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
 </body>
 </html>

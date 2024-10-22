@@ -120,7 +120,6 @@
             display: block;
         }
 
-        /* Cart icon styles */
         .cart-icon {
             position: fixed;
             top: 20px;
@@ -138,7 +137,6 @@
             transform: rotate(10deg) scale(1.1);
         }
 
-        /* Sorting dropdown */
         .sorting-form {
             display: flex;
             justify-content: flex-end;
@@ -158,10 +156,18 @@
             background-color: #f0f0f0;
             transform: scale(1.05);
         }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.875rem;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
     </style>
 </head>
 <body>
-    <!-- Cart Icon at the top right -->
     <div class="cart-icon">
         <a href="{{ url_for('view_cart') }}">
             <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Cart">
@@ -171,7 +177,6 @@
     <div class="container mx-auto mt-10">
         <h1 class="text-4xl font-bold text-center mb-8">Recommended Outfits Based on Your Analysis</h1>
 
-        <!-- Sorting Form -->
         <form method="GET" action="{{ url_for('recommendations') }}" class="sorting-form">
             <select name="sort" onchange="this.form.submit()">
                 <option value="" disabled selected>Sort by</option>
@@ -180,12 +185,10 @@
             </select>
         </form>
 
-        <!-- Clothing Grid -->
         <div class="grid mt-8">
             {% for item in clothes %}
             <a href="{{ url_for('product_page', product_id=item['id']) }}" target="_blank" class="product-link">
                 <div class="bg-white shadow-md rounded-lg p-6">
-                    <!-- Main content: Image, Name, and Price -->
                     <div class="main-content">
                         {% if item['image'] %}
                             <img src="{{ item['image'] }}" alt="{{ item['name'] }}" class="w-full h-48 object-cover">
@@ -198,7 +201,6 @@
                         <p class="price">${{ item['price'] }}</p>
                     </div>
 
-                    <!-- Additional product info (material, size) on hover -->
                     <div class="product-info">
                         <h3>{{ item['name'] }}</h3>
                         <p>Material: {{ item['material'] }}</p>
@@ -209,5 +211,9 @@
             {% endfor %}
         </div>
     </div>
+
+    <footer class="footer">
+        &copy; 2024 FashionFusion. All rights reserved.
+    </footer>
 </body>
 </html>

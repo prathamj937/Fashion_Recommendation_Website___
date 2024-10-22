@@ -6,18 +6,18 @@
     <title>Upload Your Picture for Analysis</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     
-    <!-- Internal CSS styles -->
     <style>
-        /* Body background with the image */
         body {
             background-image: url('https://images8.alphacoders.com/132/thumb-1920-1323371.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Custom styles for the analysis upload page */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -29,7 +29,6 @@
             animation: fadeIn 0.8s ease-out;
         }
 
-        /* Heading styles */
         h1 {
             color: #1E3A8A;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -39,7 +38,6 @@
             animation: slideInDown 0.8s ease-out;
         }
 
-        /* Button styles */
         button {
             transition: background-color 0.3s ease, transform 0.3s ease;
             padding: 10px 20px;
@@ -50,7 +48,6 @@
             transform: translateY(-3px);
         }
 
-        /* Input file field */
         input[type="file"] {
             border: 2px dashed #9CA3AF;
             border-radius: 8px;
@@ -74,7 +71,6 @@
             cursor: pointer;
         }
 
-        /* Results container */
         #resultsContainer {
             background-color: #F9FAFB;
             border-radius: 12px;
@@ -90,7 +86,6 @@
             margin-bottom: 10px;
         }
 
-        /* Logout button container */
         .logout-container {
             position: absolute;
             top: 20px;
@@ -108,7 +103,6 @@
             transform: translateY(-2px);
         }
 
-        /* Logout link */
         .logout-link {
             color: #DC2626;
             font-weight: bold;
@@ -119,7 +113,6 @@
             color: #B91C1C;
         }
 
-        /* Image preview styles */
         #imagePreview {
             max-width: 300px;
             max-height: 300px;
@@ -130,9 +123,8 @@
             transition: opacity 0.4s ease;
         }
 
-        /* Spinner styles */
         .spinner {
-            display: none; /* Hide initially */
+            display: none;
             border: 4px solid #f3f3f3;
             border-top: 4px solid #3498db;
             border-radius: 50%;
@@ -147,7 +139,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Animation: Slide in down */
         @keyframes slideInDown {
             from {
                 transform: translateY(-50px);
@@ -159,7 +150,6 @@
             }
         }
 
-        /* Animation: Fade in */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -169,7 +159,6 @@
             }
         }
 
-        /* Animation: Fade in up */
         @keyframes fadeInUp {
             from {
                 transform: translateY(20px);
@@ -180,32 +169,49 @@
                 opacity: 1;
             }
         }
+
+        footer {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            color: #4B5563;
+        }
+
+        footer a {
+            color: #3B82F6;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container mx-auto mt-10">
         <div class="logout-container">
-            <a href="{{ url_for('logout') }}" class="logout-link">Logout</a> <!-- Logout button in a box with red text -->
+            <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
         </div>
 
         <h1 class="text-3xl font-bold text-center">Upload Your Picture for Hair, Body, and Face Analysis</h1>
 
-        <!-- Instructions for the user -->
         <div class="text-center text-gray-600 mt-4">
             <p>Please upload a clear, front-facing picture of your face and body. Make sure there’s enough light for better results.</p>
             <p>Supported formats: PNG, JPG, JPEG. Maximum file size: 5MB.</p>
         </div>
 
-        <!-- Form to upload image -->
         <form id="uploadForm" action="/home" method="POST" enctype="multipart/form-data" class="mt-8 flex flex-col items-center">
             <input type="file" id="imageInput" name="image" accept="image/*" required class="mb-4">
             <img id="imagePreview" alt="Image Preview">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4">Analyze Picture</button>
-            <!-- Loading Spinner -->
             <div class="spinner" id="spinner"></div>
         </form>
 
-        <!-- Display results if available -->
         {% if hair_type and face_shape and body_shape %}
         <div id="resultsContainer" class="mt-8">
             <h2 class="text-2xl font-semibold">Analysis Results</h2>
@@ -221,14 +227,17 @@
         {% endif %}
     </div>
 
-    <!-- JavaScript for image preview and loading spinner -->
+    <footer>
+        <p>&copy; 2024 FashionFusion. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
     <script>
         const imageInput = document.getElementById('imageInput');
         const imagePreview = document.getElementById('imagePreview');
         const uploadForm = document.getElementById('uploadForm');
         const spinner = document.getElementById('spinner');
 
-        // Show image preview when a file is selected
         imageInput.addEventListener('change', function(event) {
             const file = event.target.files[0];
 
@@ -236,19 +245,18 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block'; // Show the preview image
-                    imagePreview.style.opacity = '1'; // Animate opacity
+                    imagePreview.style.display = 'block';
+                    imagePreview.style.opacity = '1';
                 };
                 reader.readAsDataURL(file);
             } else {
-                imagePreview.style.display = 'none'; // Hide if no image is selected
-                imagePreview.style.opacity = '0'; // Reset opacity
+                imagePreview.style.display = 'none';
+                imagePreview.style.opacity = '0';
             }
         });
 
-        // Show the spinner when the form is submitted
         uploadForm.addEventListener('submit', function() {
-            spinner.style.display = 'block';  // Show spinner
+            spinner.style.display = 'block';
         });
     </script>
 </body>

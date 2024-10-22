@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <style>
-        /* Page loading spinner */
         #spinner {
             display: flex;
             justify-content: center;
@@ -33,7 +32,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Page content fade-in after loading */
         body {
             background-image: url('https://images8.alphacoders.com/132/thumb-1920-1323371.png');
             background-size: cover;
@@ -45,7 +43,6 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        /* Main content container */
         .container {
             max-width: 600px;
             margin: 100px auto;
@@ -59,7 +56,6 @@
             transition: transform 0.8s ease, opacity 0.8s ease;
         }
 
-        /* Headings and buttons */
         h1 {
             font-size: 2.5rem;
             font-weight: bold;
@@ -89,7 +85,6 @@
             transform: translateY(-3px);
         }
 
-        /* Chatbot button */
         .chatbot-icon {
             position: fixed;
             bottom: 20px;
@@ -109,7 +104,6 @@
             transform: scale(1.1);
         }
 
-        /* Chatbot window */
         .chatbot-container {
             display: none;
             position: fixed;
@@ -148,7 +142,6 @@
             color: #374151;
         }
 
-        /* Close button */
         .chatbot-close {
             position: absolute;
             top: 10px;
@@ -157,7 +150,6 @@
             cursor: pointer;
         }
 
-        /* Input box styling */
         .chatbot-input-container {
             display: flex;
             align-items: center;
@@ -184,10 +176,18 @@
         .chatbot-send-btn:hover {
             background-color: #059669;
         }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.875rem;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
     </style>
 </head>
 <body>
-    <!-- Spinner to show during page loading -->
     <div id="spinner">
         <div class="spinner-circle"></div>
     </div>
@@ -197,29 +197,28 @@
         <p>Your order has been successfully placed.</p>
         <p>We appreciate your business and hope you enjoy your purchase.</p>
 
-        <!-- Button to redirect to login page -->
         <a href="{{ url_for('login') }}" class="btn">Exit</a>
     </div>
 
-    <!-- Chatbot Button -->
     <div class="chatbot-icon" id="chatbotIcon">
         💬
     </div>
 
-    <!-- Chatbot Container -->
     <div class="chatbot-container" id="chatbotContainer">
         <div class="chatbot-close" id="chatbotClose">✖</div>
         <div class="chatbot-header">FAQ Chatbot</div>
         <div class="chatbot-body" id="chatbotBody"></div>
 
-        <!-- Input Field for User Questions -->
         <div class="chatbot-input-container">
             <input type="text" id="chatbotInput" class="chatbot-input" placeholder="Ask a question...">
             <button id="chatbotSendBtn" class="chatbot-send-btn">Send</button>
         </div>
     </div>
 
-    <!-- JavaScript for spinner, animations, and chatbot interaction -->
+    <footer class="footer">
+        &copy; 2024 FashionFusion. All rights reserved.
+    </footer>
+
     <script>
         const spinner = document.getElementById('spinner');
         const body = document.querySelector('body');
@@ -231,7 +230,6 @@
         const chatbotInput = document.getElementById('chatbotInput');
         const chatbotSendBtn = document.getElementById('chatbotSendBtn');
 
-        // Predefined FAQs
         const faqData = [
             { question: "When will my order arrive?", answer: "Orders typically arrive within 5-7 business days." },
             { question: "How do I track my order?", answer: "You can track your order using the tracking number provided in the confirmation email." },
@@ -239,7 +237,6 @@
             { question: "What is your return policy?", answer: "We offer a 7-day return policy on all items." }
         ];
 
-        // Remove spinner and show page after loading
         window.addEventListener('load', () => {
             spinner.style.display = 'none';
             body.style.opacity = '1';
@@ -247,13 +244,11 @@
             container.style.opacity = '1';
         });
 
-        // Show chatbot when the icon is clicked
         chatbotIcon.addEventListener('click', () => {
             chatbotContainer.style.display = 'block';
             chatbotContainer.style.opacity = '1';
         });
 
-        // Hide chatbot when the close button is clicked
         chatbotClose.addEventListener('click', () => {
             chatbotContainer.style.opacity = '0';
             setTimeout(() => {
@@ -261,35 +256,31 @@
             }, 300);
         });
 
-        // Function to find FAQ answer based on user question
         function findAnswer(question) {
             const lowerCaseQuestion = question.toLowerCase();
             const faq = faqData.find(faq => lowerCaseQuestion.includes(faq.question.toLowerCase()));
             return faq ? faq.answer : "I'm sorry, I don't have an answer for that. Please check our FAQs.";
         }
 
-        // Function to display a message in the chatbot
         function displayMessage(message, isUser = false) {
             const messageDiv = document.createElement('div');
             messageDiv.textContent = message;
             messageDiv.style.fontWeight = isUser ? 'bold' : 'normal';
             messageDiv.style.marginBottom = '10px';
             chatbotBody.appendChild(messageDiv);
-            chatbotBody.scrollTop = chatbotBody.scrollHeight;  // Scroll to the bottom
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
         }
 
-        // Handle the send button click
         chatbotSendBtn.addEventListener('click', () => {
             const userQuestion = chatbotInput.value.trim();
             if (userQuestion) {
-                displayMessage(userQuestion, true);  // Show user question
-                const answer = findAnswer(userQuestion);  // Find answer
-                displayMessage(answer);  // Show chatbot answer
-                chatbotInput.value = '';  // Clear input field
+                displayMessage(userQuestion, true);
+                const answer = findAnswer(userQuestion);
+                displayMessage(answer);
+                chatbotInput.value = '';
             }
         });
 
-        // Handle pressing Enter to send the question
         chatbotInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 chatbotSendBtn.click();
